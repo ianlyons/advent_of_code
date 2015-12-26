@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var fs = require('fs');
 
 function testInputs(fn, inputs, expected) {
   var res = fn.apply(null, inputs);
@@ -11,6 +12,12 @@ function testInputs(fn, inputs, expected) {
   console.log('SUCCESS!');
 }
 
+function readFileIntoArr(path) {
+  var file = fs.readFileSync(path, {encoding: 'utf-8'});
+  return _.compact(file.split('\n'));
+}
+
 module.exports = {
-  testInputs: testInputs
+  testInputs: testInputs,
+  readFileIntoArr: readFileIntoArr
 };
